@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10231c">
+<title>FitTrack — Personal Fitness OS</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top"><div class="topin">
+ <div class="topline"><div class="brand"><div class="logo">F</div>FitTrack <span style="font-size:10px;color:#a9c8b4;font-weight:650">PERSONAL</span></div><div class="top-actions"><button class="iconbtn" id="jumpToday">Today</button><button class="iconbtn" id="profileQuick">Profile ⚙</button><button class="iconbtn" id="accountButton">Account</button></div></div>
+ <div class="greeting"><div><div class="eyebrow">Your fitness journey</div><h1 id="hello">Let's get stronger.</h1><p id="subhello">Small consistent steps. Stronger every week.</p></div><div class="datepill" id="datePill"></div></div>
+ <div class="hero-stats">
+  <div class="hero-stat"><span>Current weight</span><strong id="heroWeight">—</strong><small id="weightDelta">Add your weigh-in</small></div>
+  <div class="hero-stat"><span>Target weight</span><strong id="heroTarget">60 kg</strong><small id="weightLeft">Your goal</small></div>
+  <div class="hero-stat"><span>Height</span><strong id="heroHeight">168 cm</strong><small id="heroFeet">5 ft 6 in</small></div>
+  <div class="hero-stat"><span>Today's completion</span><strong id="heroComplete">0%</strong><small>Meals + workout</small></div>
+ </div>
+</div></header>
+<div class="app">
+<nav class="nav" id="nav">
+ <button class="active" data-view="dashboard">Overview</button><button data-view="calendar">Calendar</button><button data-view="food">Nutrition</button><button data-view="workouts">Gym & stamina</button><button data-view="progress">Progress</button><button data-view="profile">My profile</button>
+</nav>
+<main>
+<section class="view active" id="dashboard">
+ <div class="section-head"><div><h2>Today at a glance</h2><p id="todayLabel"></p></div><span class="badge" id="dietBadge">Vegetarian day</span></div>
+ <div class="grid two">
+  <div class="card">
+   <div class="cardhead"><h3>Daily completion</h3><span class="tiny" id="doneText">0 / 0 done</span></div>
+   <div class="ringrow"><div class="ring" id="completionRing"><b id="completionPct">0%</b></div><div class="ringtext"><strong id="completionTitle">A fresh start</strong><span id="completionHint">Check off meals and training as you go.</span></div></div>
+   <div style="margin-top:17px"><div class="row"><span class="tiny">Food checklist</span><b class="tiny" id="foodPct">0%</b></div><div class="progress"><i id="foodBar"></i></div></div>
+   <div style="margin-top:12px"><div class="row"><span class="tiny">Workout checklist</span><b class="tiny" id="gymPct">0%</b></div><div class="progress orange"><i id="gymBar"></i></div></div>
+  </div>
+  <div class="card"><div class="cardhead"><h3>Today's workout</h3><span class="badge orange" id="workoutTag">Strength</span></div><h3 id="workoutName" style="font-size:20px;margin:3px 0 5px">Chest + triceps</h3><p class="tiny" id="workoutSummary">Strength training with easy run/walk intervals.</p><button class="btn light" style="margin-top:12px" data-goto="workouts">Open workout plan →</button></div>
+ </div>
+ <div class="section-head"><div><h2>Today's food checklist</h2><p>Tick each meal when you've had it.</p></div><button class="btn small light" data-goto="food">Full plan</button></div>
+ <div class="card"><div id="dashMeals" class="meal-layout"></div></div>
+ <div class="section-head"><div><h2>Week snapshot</h2><p>Your next seven days at a glance.</p></div><button class="btn small outline" data-goto="calendar">Open calendar</button></div>
+ <div class="card"><div class="weekstrip" id="dashWeek"></div><div class="tiny" id="weekSummary"></div></div>
+</section>
+<section class="view" id="calendar">
+ <div class="section-head"><div><h2>Year calendar</h2><p>See your whole year, then zoom into any month, week or day.</p></div><span class="badge" id="yearBadge"></span></div>
+ <div class="card">
+  <div class="calendar-toolbar"><button class="btn small outline" id="prevYear">← Year</button><strong id="yearTitle" class="month-title"></strong><button class="btn small outline" id="nextYear">Year →</button></div>
+  <div class="yeargrid" id="yearGrid"></div>
+ </div>
+ <div class="section-head"><div><h2>Month & week tracker</h2><p>Select a date to view its meals and workout.</p></div></div>
+ <div class="card">
+  <div class="calendar-toolbar"><button class="btn small outline" id="prevMonth">←</button><strong id="monthTitle" class="month-title"></strong><button class="btn small outline" id="nextMonth">→</button></div>
+  <div class="calgrid" id="monthGrid"></div>
+  <div class="section-head" style="margin-top:17px"><div><h3 id="selectedDateTitle">Selected day</h3><p id="selectedDateSub"></p></div><span class="badge" id="selectedDietBadge"></span></div>
+  <div class="weekstrip" id="calendarWeek"></div>
+  <div class="dayplan"><div class="card"><div class="cardhead"><h3>Meals</h3><span class="tiny" id="selectedMealCount"></span></div><div id="calendarMeals"></div></div><div class="card"><div class="cardhead"><h3>Workout</h3><span class="tiny" id="selectedGymCount"></span></div><div id="calendarWorkout"></div></div></div>
+ </div>
+</section>
+<section class="view" id="food">
+ <div class="section-head"><div><h2>Nutrition planner</h2><p>Your PG-friendly meal plan with strict vegetarian days.</p></div><span class="badge">7-day plan</span></div>
+ <div class="card"><div class="calendar-toolbar"><button class="btn small outline" id="foodPrev">←</button><strong id="foodDayTitle" class="month-title"></strong><button class="btn small outline" id="foodNext">→</button></div><div class="weekstrip" id="foodWeek"></div><div class="row" style="margin:8px 0 12px"><span class="tiny" id="foodDayDesc"></span><span class="badge" id="foodDietBadge"></span></div><div id="foodChecklist" class="meal-layout"></div></div>
+ <div class="grid two" style="margin-top:14px"><div class="card"><h3>Daily nutrition reminders</h3><div class="checklist" id="nutritionHabits"></div></div><div class="card"><h3>Protein guide</h3><p class="tiny">A practical starting range for your 60 kg target is around 95–110 g protein/day. Actual intake depends on serving sizes and food labels.</p><div class="checklist"><div class="checkrow"><label><strong>Vegetarian days</strong><small>Paneer, soy chunks, dal, curd, milk, roasted chana.</small></label></div><div class="checkrow"><label><strong>Non-vegetarian days</strong><small>Chicken and eggs, alongside your regular PG meals.</small></label></div><div class="checkrow"><label><strong>PG lunch upgrade</strong><small>Add a generous dal serving and curd; include extra protein if available.</small></label></div></div></div></div>
+</section>
+<section class="view" id="workouts">
+ <div class="section-head"><div><h2>Gym & stamina</h2><p>Beginner-friendly strength training plus gradual run/walk training.</p></div><span class="badge orange">60 min guide</span></div>
+ <div class="grid three">
+  <div class="card"><span class="badge">Warm-up</span><h3 style="font-size:23px;margin:10px 0 3px">5–10 min</h3><p class="tiny">Easy walk/cycle and mobility.</p></div>
+  <div class="card"><span class="badge">Strength</span><h3 style="font-size:23px;margin:10px 0 3px">25–30 min</h3><p class="tiny">Controlled reps, comfortable weights.</p></div>
+  <div class="card"><span class="badge orange">Cardio</span><h3 style="font-size:23px;margin:10px 0 3px">15–20 min</h3><p class="tiny">Easy cardio, then cool down.</p></div>
+ </div>
+ <div class="card" style="margin-top:14px"><div class="calendar-toolbar"><button class="btn small outline" id="gymPrev">←</button><strong class="month-title" id="gymDayTitle"></strong><button class="btn small outline" id="gymNext">→</button></div><div class="weekstrip" id="gymWeek"></div><div class="row" style="margin-bottom:10px"><strong id="gymDayName"></strong><span class="badge orange" id="gymType"></span></div><div id="gymTasks"></div><div class="tiny" id="gymProgressText" style="margin-top:10px"></div></div>
+ <div class="card" style="margin-top:14px"><h3>4-week run/walk progression</h3><p class="tiny">Run/walk three days a week (Monday, Thursday, Saturday). Warm up and cool down in addition to intervals. Repeat a week if it feels difficult.</p><div class="checklist" id="runWeeks"></div><div class="notice" style="margin-top:12px;background:#fff7ed;border:1px solid #f4e0c6;border-radius:12px;padding:11px;color:#85562a;font-size:11px">Jog at a pace where you can speak in short sentences. Stop for chest pain, dizziness, wheezing or unusual breathlessness. If breathlessness is disproportionate at an easy pace, seek medical advice before progressing.</div></div>
+</section>
+<section class="view" id="progress">
+ <div class="section-head"><div><h2>Progress & consistency</h2><p>Track body weight, habits and how your stamina feels.</p></div></div>
+ <div class="grid two">
+  <div class="card"><h3>Log your weight</h3><div class="fields"><div class="fieldwrap"><label class="field">Date</label><input type="date" id="logDate"></div><div class="fieldwrap"><label class="field">Weight (kg)</label><input type="number" id="logWeight" min="30" max="200" step=".1" placeholder="e.g. 57.5"></div></div><button class="btn" id="saveWeight" style="width:100%;margin-top:10px">Save weigh-in</button><div id="weightChart" class="chart"></div><div id="weightHistory" class="tiny" style="margin-top:10px"></div></div>
+  <div class="card"><h3>Weekly check-in</h3><div class="fields"><div class="fieldwrap"><label class="field">Average sleep (hrs)</label><input type="number" id="sleepHours" min="0" max="24" step=".5" placeholder="7.5"></div><div class="fieldwrap"><label class="field">Water (litres/day)</label><input type="number" id="waterLitres" min="0" max="10" step=".25" placeholder="2.5"></div></div><div class="fieldwrap" style="margin-top:10px"><label class="field">Stamina / workout notes</label><textarea id="checkinNotes" placeholder="How did running feel? Any improvement in weights or energy?"></textarea></div><button class="btn" id="saveCheckin" style="width:100%;margin-top:10px">Save check-in</button><p class="tiny" id="checkinSaved"></p></div>
+ </div>
+ <div class="card" style="margin-top:14px"><h3>Consistency by week</h3><div id="weeklyStats"></div></div>
+ <div class="card" style="margin-top:14px"><h3>Data backup</h3><p class="tiny">Your entries are stored in this browser on this device. Export a backup before clearing browser data or changing phones.</p><div class="btnrow"><button class="btn light" id="exportData">Export backup</button><label class="btn outline" style="display:inline-flex;align-items:center">Import backup<input id="importData" type="file" accept="application/json" style="display:none"></label><button class="btn danger" id="resetData">Reset data</button></div></div>
+</section>
+<section class="view" id="profile">
+ <div class="section-head"><div><h2>Your profile</h2><p>Update your details whenever your goal or weight changes.</p></div><span class="badge">Personal setup</span></div>
+ <div class="grid two">
+  <div class="card"><h3>Basic details</h3><div class="fieldwrap"><label class="field">Your name</label><input id="profileName" type="text" placeholder="Your name"></div><div class="fields" style="margin-top:11px"><div class="fieldwrap"><label class="field">Current weight (kg)</label><input id="profileWeight" type="number" min="30" max="200" step=".1" placeholder="Enter current weight"></div><div class="fieldwrap"><label class="field">Target weight (kg)</label><input id="profileTarget" type="number" min="30" max="200" step=".1" value="60"></div><div class="fieldwrap"><label class="field">Height (cm)</label><input id="profileHeight" type="number" min="100" max="230" step="1" value="168"></div><div class="fieldwrap"><label class="field">Gym time</label><select id="profileGymTime"><option>Evening</option><option>Morning</option><option>Afternoon</option></select></div></div><button class="btn" id="saveProfile" style="width:100%;margin-top:13px">Save profile</button></div>
+  <div class="card"><h3>Your preferences</h3><div class="checkrow"><label><strong>PG breakfast</strong><small>Muesli, milk and fruit.</small></label></div><div class="checkrow"><label><strong>PG lunch</strong><small>Rice + dal + sabzi/curd where available.</small></label></div><div class="checkrow"><label><strong>Strict vegetarian days</strong><small>Monday, Tuesday and Thursday — no eggs, chicken or fish.</small></label></div><div class="checkrow"><label><strong>Other days</strong><small>Chicken and eggs are included in the meal rotation.</small></label></div><div class="checkrow"><label><strong>Training level</strong><small>Beginner; build up running gradually.</small></label></div></div>
+ </div>
+</section>
+</main>
+</div>
+<div class="auth-shell" id="authShell" aria-hidden="true">
+ <div class="auth-card">
+  <div class="auth-brand"><div class="logo">F</div><div><strong>FitTrack</strong><span>Your private fitness space</span></div></div>
+  <div class="auth-tabs"><button class="auth-tab active" data-auth-tab="login">Sign in</button><button class="auth-tab" data-auth-tab="register">Create account</button></div>
+  <form id="authForm">
+   <div class="auth-copy"><h1 id="authTitle">Welcome back</h1><p id="authSubtitle">Sign in to continue your fitness journey.</p></div>
+   <label class="field">Email address<input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+   <label class="field">Password<input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters" minlength="6" required></label>
+   <label class="field auth-name-field" hidden>Your name<input id="authName" type="text" autocomplete="name" placeholder="Your name"></label>
+   <p class="auth-error" id="authError" role="alert"></p>
+   <button class="btn auth-submit" type="submit" id="authSubmit">Sign in</button>
+  </form>
+  <p class="auth-note">Your account stays in this browser. Use Export backup before moving to another device.</p>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="app.js" defer></script>
+</body></html>
